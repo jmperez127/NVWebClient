@@ -1,4 +1,4 @@
-
+NVApp.run();
 
 
 Keycodes= {
