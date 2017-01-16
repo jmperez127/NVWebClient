@@ -115,16 +115,31 @@ NV(function () {
     });
 
     describe("#remove()", function () {
-      it("should remove the item on a given index", function(){
+      it("should remove the item on a given index", function () {
         assert.deepEqual(globalList.delete(1).get(), [{
           title: "test", content: "Test note"
         }])
       })
-    })
+    });
 
-    describe("#filter()", function(){
-      it("should return filtered items", function(){
-        
+    describe("#filter()", function () {
+      it("should return filtered items", function () {
+        list = new List([
+          {title: "B", content: "X"},
+          {title: "BB", content: "X"},
+          {title: "My content matche the test", content: "LL"},
+          {title: "CA", content: "Q"}
+        ]);
+
+        assert.deepEqual(list.filter("L"), [
+          {title: "My content matche the test", content: "LL"}
+        ]);
+
+        assert.deepEqual(list.filter("B"), [
+          {title: "B", content: "X"},
+          {title: "BB", content: "X"}
+        ]);
+
       })
     })
 
