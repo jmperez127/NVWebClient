@@ -1,3 +1,3 @@
-## Run tests:
+## Run tests###
 npm install
 npm test
