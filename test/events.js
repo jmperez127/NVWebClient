@@ -6,13 +6,21 @@ NV(function () {
 
   describe('Events', function () {
 
-    describe("#on('event', callback), emit('event') and un", function () {
+    describe("#on('event', callback), emit('event') and unsubscribe('event')", function () {
 
-      this.timeout(5000);
+      var num;
+      beforeEach(function () {
+        num = 0;
+        app.on('add', function (event, args) {
+          num += args['quantity'];
+        });
+
+        app.on('subtract', function (event, args) {
+          num -= args['quantity'];
+        });
+      });
 
       it('should perform calculations when the event is emmited', function () {
-        var mocha = this;
-        var num = 0;
 
         app.on('add', function (event, args) {
           num += 10;
@@ -34,15 +42,6 @@ NV(function () {
 
 
       it('should allow the emit call to send params', function () {
-        var num = 0;
-
-        app.on('add', function (event, args) {
-          num += args['quantity'];
-        });
-
-        app.on('subtract', function (event, args) {
-          num -= args['quantity'];
-        });
 
         app.emit("add", {quantity: 50});
         assert.equal(num, 50);
@@ -50,16 +49,10 @@ NV(function () {
         app.emit("subtract", {quantity: 30});
         assert.equal(num, 20);
 
-
       });
 
 
       it('should unsubscribe to events', function () {
-        var num = 0;
-
-        app.on('add', function (event, args) {
-          num += args['quantity'];
-        });
 
         app.emit("add", {quantity: 50});
         assert.equal(num, 50);
