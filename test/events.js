@@ -1,6 +1,5 @@
 var assert = require('assert');
 var app = require('../js/app/app');
-var list = require('../js/app/events');
 
 NV(function () {
   var app = this;

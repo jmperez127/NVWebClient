@@ -8,15 +8,24 @@ NVApp = {
   }
 };
 
-var BootstrapApp = function () {
-  observer = new ObserverSubscribtionManager();
+NV = null;
 
-  return function (func) {
-    this.on = observer.onEvent;
-    this.emit = observer.emitEvent;
-    this.unsubscribe = observer.unsubscribeEvent;
-    NVApp.codeBlocks.push(func);
+(function () {
+
+  var BootstrapApp = function () {
+    observer = new ObserverSubscribtionManager();
+
+    return function (func) {
+      this.on = observer.onEvent;
+      this.emit = observer.emitEvent;
+      this.unsubscribe = observer.unsubscribeEvent;
+      NVApp.codeBlocks.push(func);
+    };
   };
+
+
+  NV = new BootstrapApp();
+
 
   // Event subscriber / observer implementation
   function ObserverSubscribtionManager() {
@@ -66,8 +75,6 @@ var BootstrapApp = function () {
         callback(event);
     };
   }
-};
 
-NV = new BootstrapApp();
-
+})();
 
