@@ -6,19 +6,19 @@ NV(function () {
 
   describe('Events', function () {
 
-    describe("#on('event', callback), emit('event') and unsubscribe('event')", function () {
-
-      var num;
-      beforeEach(function () {
-        num = 0;
-        app.on('add', function (event, args) {
-          num += args['quantity'];
-        });
-
-        app.on('subtract', function (event, args) {
-          num -= args['quantity'];
-        });
+    var num;
+    beforeEach(function () {
+      num = 0;
+      app.on('add', function (e, args) {
+        num += args['quantity'];
       });
+
+      app.on('subtract', function (e, args) {
+        num -= args['quantity'];
+      });
+    });
+
+    describe("#on('event', callback), emit('event') and unsubscribe('event')", function () {
 
       it('should perform calculations when the event is emmited', function () {
 
