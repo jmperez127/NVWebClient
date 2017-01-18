@@ -1,13 +1,13 @@
 NVApp = {
-  code: [],
+  codeBlocks: [],
   run: function () {
-
-    this.code.forEach(function (c) {
-      c();
+    this.codeBlocks.forEach(function (code) {
+      code.bind(this);
+      code();
     })
   }
 };
 
 NV = function (func) {
-  NVApp.code.push(func);
+  NVApp.codeBlocks.push(func);
 };
